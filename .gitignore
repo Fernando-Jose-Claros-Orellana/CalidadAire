@@ -1,0 +1,86 @@
+############################
+# Archivos de usuario / IDE
+############################
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+############################
+# Resultados de compilación
+############################
+
+bin/
+obj/
+out/
+[Bb]uild/
+[Bb]ld/
+
+# Logs de MSBuild
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+############################
+# Archivos de publicación
+############################
+
+*.publishsettings
+*.pubxml
+*.pubxml.user
+Properties/PublishProfiles/
+
+############################
+# Paquetes / dependencias
+############################
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+
+node_modules/
+
+############################
+# Sistema operativo
+############################
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+
+############################
+# Otros archivos temporales
+############################
+
+*.tmp
+*.temp
+*.log
+*.cache
+*.bak
+*.swp
+*.orig

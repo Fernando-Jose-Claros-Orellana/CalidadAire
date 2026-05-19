@@ -1,0 +1,6 @@
+@ParcialFJCO_HostAddress = http://localhost:5168
+
+GET {{ParcialFJCO_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

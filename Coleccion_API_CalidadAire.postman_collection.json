@@ -1,0 +1,263 @@
+{
+  "info": {
+    "_postman_id": "6eb11a7b-00e2-4ad1-b1b3-2f2c2f2b2a5a",
+    "name": "Coleccion API CalidadAire",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38154773"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Auth - Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "const token = json?.message || json?.token || \"\";",
+                  "",
+                  "pm.test(\"Token exists in response\", function () {",
+                  "    pm.expect(token).to.be.a(\"string\").and.not.empty;",
+                  "});",
+                  "",
+                  "if (token) {",
+                  "    pm.collectionVariables.set(\"token\", token);",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"usuarioAdmin\",\n  \"password\": \"12345\"\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7237/api/login",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7237",
+              "path": [
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Lecturas",
+      "item": [
+        {
+          "name": "Lecturas - Registrar",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status is 200 or 201\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "",
+                  "pm.test(\"Response contains lectura\", function () {",
+                  "    pm.expect(json).to.have.property(\"lectura\");",
+                  "});",
+                  "",
+                  "pm.test(\"Response has alerta property (nullable)\", function () {",
+                  "    pm.expect(json).to.have.property(\"alerta\");",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sensorId\": 1,\n  \"pm2_5\": 80,\n  \"pm10\": 120,\n  \"co2\": 900\n}"
+            },
+            "url": {
+              "raw": "https://localhost:7237/api/lecturas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7237",
+              "path": [
+                "api",
+                "lecturas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lecturas - Obtener",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:7237/api/lecturas?fechaDesde=2026-05-19&fechaHasta=2026-05-21&sensorId=1&contaminante=PM2_5",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7237",
+              "path": [
+                "api",
+                "lecturas"
+              ],
+              "query": [
+                {
+                  "key": "fechaDesde",
+                  "value": "2026-05-19"
+                },
+                {
+                  "key": "fechaHasta",
+                  "value": "2026-05-21"
+                },
+                {
+                  "key": "sensorId",
+                  "value": "1"
+                },
+                {
+                  "key": "contaminante",
+                  "value": "PM2_5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Lecturas - Obtener enriquecidas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:7237/api/lecturas/enriquecidas?fechaDesde=2026-05-19&fechaHasta=2026-05-21&sensorId=1&contaminante=PM2_5",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7237",
+              "path": [
+                "api",
+                "lecturas",
+                "enriquecidas"
+              ],
+              "query": [
+                {
+                  "key": "fechaDesde",
+                  "value": "2026-05-19"
+                },
+                {
+                  "key": "fechaHasta",
+                  "value": "2026-05-21"
+                },
+                {
+                  "key": "sensorId",
+                  "value": "1"
+                },
+                {
+                  "key": "contaminante",
+                  "value": "PM2_5"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Alertas",
+      "item": [
+        {
+          "name": "Alertas - Obtener",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "https://localhost:7237/api/alertas",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "7237",
+              "path": [
+                "api",
+                "alertas"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5168"
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ParcialFJCO.Application/ParcialFJCO.Application.csproj" />
+  <Project Path="ParcialFJCO.Domain/ParcialFJCO.Domain.csproj" />
+  <Project Path="ParcialFJCO.Infraestructure/ParcialFJCO.Infraestructure.csproj" />
+  <Project Path="ParcialFJCO/ParcialFJCO.API.csproj" />
+</Solution>
