@@ -3,6 +3,8 @@
 API RESTful para gestionar lecturas de calidad del aire en una planta industrial.  
 Permite registrar lecturas desde sensores, generar alertas automáticas según umbrales definidos y consultar lecturas (incluyendo una vista enriquecida con datos de clima externo).
 
+Nota:Si no le aparece el proyecto api para ejecutar clik derecho y establecer como proyecto de inicio para ejecutar la app
+
 ## Tecnologías
 
 - .NET 10 (ASP.NET Core Web API)
